@@ -57,6 +57,20 @@ routes.get('/title/:title', async (req: Request, res: Response, next) => {
 		next(err)
 	}
 })
+routes.get('/location/:location', async (req: Request, res: Response, next) => {
+	try {
+		const offer = await offersModel.getOneFromLocationSuggest(
+			req.params.location as unknown as string
+		)
+		res.json({
+			status: 'success',
+			data: offer,
+			message: 'offer retrieved successfully',
+		})
+	} catch (err) {
+		next(err)
+	}
+})
 // get specific offer by description
 routes.get('/des/:des', async (req: Request, res: Response, next) => {
 	try {

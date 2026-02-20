@@ -78,7 +78,11 @@ app.post('/ver', (req: Request, res: Response) => {
 const server = http.createServer(app)
 const io = new Server(server, {
 	cors: {
-		origin: ['http://localhost:3000', 'http://localhost:3001'],
+		origin: [
+			'http://localhost:3000',
+			'http://localhost:3001',
+			'http://192.168.1.3:3000',
+		],
 		methods: ['GET', 'POST'],
 	},
 })

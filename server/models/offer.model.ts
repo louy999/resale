@@ -85,6 +85,21 @@ class OffersModel {
 			throw new Error(`.could not find offer ${title}, ${err}`)
 		}
 	}
+	async getOneFromLocationSuggest(location: string): Promise<Offers[]> {
+		try {
+			//open connect with DB
+			const connect = await db.connect()
+			const sql = 'SELECT * from offers WHERE location=($1) LIMIT 10'
+			//run query
+			const result = await connect.query(sql, [location])
+			//release connect
+			connect.release()
+			//return get offer location
+			return result.rows
+		} catch (err) {
+			throw new Error(`.could not find offer ${location}, ${err}`)
+		}
+	}
 	//get specific offer by description
 	async getOneFromDescription(description: string): Promise<Offers[]> {
 		try {
